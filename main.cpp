@@ -1,30 +1,35 @@
 #include <iostream>
 #include <vector>
 #include "Weapon.h"
-using namespace std;
+
+#include "Potion.h"
+#include <vector>
+
+std::vector<Item*> initializeDefaultItems() {
+    std::vector<Item*> items;
+        items.emplace_back(new Potion("Ultra Super Health Potion", 200.0, 50));
+        items.emplace_back(new Potion("Good Health Potion", 55.0, 20));
+        items.emplace_back(new Potion("Mediocre Health Potion", 5.0, 5));
+        items.emplace_back(new Weapon("Dagger", 50.0, 10));
+        items.emplace_back(new Weapon("Sword", 100.0, 25));
+        items.emplace_back(new Weapon("Broadsword", 200.0, 35));
+    return items;
+}
+
 
 int main() {
-    cout << "=== RPG Inventory Demo ===" << endl;
 
-    // Stack-objekt
-    Weapon sword("Iron Sword", 3.5, 50);
-    sword.display();
-    sword.use();
+    std::vector<Item*> defaultItems = initializeDefaultItems();
 
-    // Heap-objekt
-    vector<Item*> inventory;
-    inventory.push_back(new Weapon("Magic Staff", 2.2, 70));
-    inventory.push_back(new Weapon("Battle Axe", 5.0, 65));
-
-    cout << "\n-- Inventory List --" << endl;
-    for(auto item : inventory) {
-        item->display();
-        item->use();
+    std::cout << "=== RPG Inventory Demo ===" << std::endl;
+        std::cout << "Deafult items: " << std::endl;
+    for(Item* items : defaultItems){
+        items->display();
     }
 
-    for(auto item : inventory) delete item;
-    inventory.clear();
-
-    cout << "\nAll heap memory freed. Program finished!" << endl;
+    for (Item* item : defaultItems) {
+        delete item;
+        item = nullptr;
+    }
     return 0;
 }
