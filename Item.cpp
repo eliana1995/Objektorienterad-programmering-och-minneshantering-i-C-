@@ -1,6 +1,7 @@
 #include "Item.h"
 
-Item::Item(const std::string& n, double w) : name(n), weight(w) {}
+Item::Item(const std::string& name, double value)
+    : name(name), value(value) {}
 
 std::string Item::getName() const { return name; }
-double Item::getWeight() const { return weight; }
+double Item::getValue() const { return value; }

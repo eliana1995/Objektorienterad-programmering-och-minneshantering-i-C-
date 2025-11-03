@@ -6,15 +6,15 @@
 class Item {
 protected:
     std::string name;
-    double weight;
+    double value;
 
 public:
-    Item(const std::string& name, double weight);
+    Item(const std::string& name, double value);
     virtual ~Item() {}
     std::string getName() const;
-    double getWeight() const;
+    double getValue() const;
     virtual void display() const = 0;
-    virtual void use() = 0;
+    void use();
 };
 
 #endif

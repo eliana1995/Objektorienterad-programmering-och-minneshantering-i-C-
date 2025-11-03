@@ -9,9 +9,9 @@ private:
     bool equipped;
 
 public:
-    Weapon(const std::string& name, double weight, int damage);
+    Weapon(const std::string& name, double value, int damage);
     void display() const override;
-    void use() override;
+    void use();
 };
 
 #endif

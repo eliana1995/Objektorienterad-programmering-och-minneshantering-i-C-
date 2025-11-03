@@ -1,16 +1,16 @@
 #include "Weapon.h"
 #include <iostream>
 
-Weapon::Weapon(const std::string& name, double weight, int damage)
-    : Item(name, weight), damage(damage), equipped(false) {}
+Weapon::Weapon(const std::string& name, double value, int damage)
+    : Item(name, value), damage(damage), equipped(false) {}
 
 void Weapon::display() const {
     std::cout << "Weapon: " << name
-              << " | Weight: " << weight
+              << " | Value: " << value
               << " | Damage: " << damage
               << (equipped ? " [Equipped]" : "")
               << std::endl;
-}
+} 
 
 void Weapon::use() {
     equipped = !equipped;
