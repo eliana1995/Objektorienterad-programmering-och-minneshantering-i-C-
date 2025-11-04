@@ -10,11 +10,13 @@ Potion::Potion(const std::string& name, double value, int boost)
 void Potion::display() const {
     std::cout << "Potion: " << name 
                 << " | Value: " << value 
-                << " | Boost: " << boost 
+                << " | Health Boost: " << boost 
                 << std::endl;
 }
 
-void Potion::usePotion(Player player){
+
+
+void Potion::use(Player& player){
     int currentHealth = player.getHealth();
     int newHealth = currentHealth + boost;
 
