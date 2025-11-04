@@ -5,15 +5,28 @@
 #include "Armor.h"
 #include "Potion.h"
 
+std::vector<Item*> initializeDefaultItems() {
+    std::vector<Item*> items;
+        items.emplace_back(new Potion("Ultra Super Health Potion", 200.0, 50));
+        items.emplace_back(new Potion("Good Health Potion", 55.0, 20));
+        items.emplace_back(new Potion("Mediocre Health Potion", 5.0, 5));
+        items.emplace_back(new Weapon("Dagger", 50.0, 10));
+        items.emplace_back(new Weapon("Sword", 100.0, 25));
+        items.emplace_back(new Weapon("Broadsword", 200.0, 35));
+        items.emplace_back(new Armor("Iron chest", 500.00, 50, false));
+        items.emplace_back(new Armor("Helmet", 150.0, 20, false));
+        items.emplace_back(new Armor("Leather leggings", 25.0, 5, true));
+    return items;
+}
 
-void showMenu() {
-    std::cout << "\n===== RPG Inventory Menu =====\n"
-              << "1. Add Weapon\n"
-              << "2. Add Armor\n"
-              << "3. Add Potion\n"
-              << "4. Show Inventory\n"
-              << "5. Use Item\n"
-              << "6. Remove Item\n"
+
+
+
+std::vector<Item*> defaultItems = initializeDefaultItems();
+
+void showMenu(Player* player, bool& running) {
+    std::cout << "\n===== Inventory Menu =====\n"
+              << "1. Choose Item to inventory\n"
               << "0. Exit\n"
               << "Choose an option: ";
 }
