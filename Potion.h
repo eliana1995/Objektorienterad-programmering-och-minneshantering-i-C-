@@ -11,13 +11,9 @@ private:
 
 public:
     Potion(const std::string& name, double value, int boost);
-
-    
     void display() const override;
-    void usePotion(Player player);
+    void use(Player& player) override;
 
 };
-
-
 
 #endif

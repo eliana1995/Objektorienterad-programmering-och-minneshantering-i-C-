@@ -34,3 +34,6 @@
 
 .vscode
 .idea
+
+# Ignorerar mappen build
+build/
