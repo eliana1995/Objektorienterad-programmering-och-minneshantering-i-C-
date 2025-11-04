@@ -1,18 +1,24 @@
-EXECUTABLE = RPGGamee
+EXECUTABLE = game
 CC = g++
 CFLAGS = -Wall -g -std=c++11
 SOURCES = main.cpp Armor.cpp Item.cpp Player.cpp Potion.cpp Weapon.cpp
-OBJECTS = $(SOURCES:.cpp=.o)
+OBJDIR = build
+OBJECTS = $(addprefix $(OBJDIR)/, $(SOURCES:.cpp=.o))
+
+TARGET = $(OBJDIR)/$(EXECUTABLE)
  
 .PHONY: all
-all: $(EXECUTABLE)
+all: $(TARGET)
  
-$(EXECUTABLE): $(OBJECTS)
-				$(CC) $(CFLAGS) $(OBJECTS) -o $(EXECUTABLE)
+$(TARGET): $(OBJECTS)
+				$(CC) $(CFLAGS) $(OBJECTS) -o $(TARGET)
  
-%.o: %.cpp
+$(OBJDIR)/%.o: %.cpp | $(OBJDIR)
 				$(CC) $(CFLAGS) -c $< -o $@
- 
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
 .PHONY: clean
 clean:
-				rm -f $(OBJECTS) $(EXECUTABLE)
+				rm -rf $(OBJECTS)
