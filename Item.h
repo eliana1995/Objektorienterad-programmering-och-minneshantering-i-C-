@@ -3,6 +3,9 @@
 
 #include <string>
 
+// Forward declaration
+class Player;
+
 class Item {
 protected:
     std::string name;
@@ -14,7 +17,7 @@ public:
     std::string getName() const;
     double getValue() const;
     virtual void display() const = 0;
-    void use();
+    virtual void use(Player& player) = 0;
 };
 
 #endif
