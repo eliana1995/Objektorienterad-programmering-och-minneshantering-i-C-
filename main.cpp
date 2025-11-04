@@ -29,16 +29,82 @@ void showMenu(Player* player, bool& running) {
               << "1. Choose Item to inventory\n"
               << "0. Exit\n"
               << "Choose an option: ";
+        int choice;
+        std::cin >> choice;
+
+        switch (choice) {
+            case 1: {
+                bool validChoice = false;
+                while (!validChoice){
+                std::cout << "Choose an item to add to inventory:\n" << std::endl;
+                int index = 0;
+                    for(Item* items : defaultItems){
+                        std::cout << (index + 1) << ". ";
+                         items->display();
+                         index++;
+                        }
+                        int itemChoice;
+                        std:: cin >> itemChoice;
+
+                        itemChoice -= 1;
+
+                        if (itemChoice >= 0 && itemChoice < int(defaultItems.size())) {
+                            player->addItem(defaultItems[itemChoice]);
+                            std::cout << "Item added to your inventory!\n";
+                            validChoice = true;
+                        } else {
+                            std::cout << "Invalid choice. Try again!\n";
+                        }
+                    }
+                break;
+            }
+            case 0:
+                running = false;
+                break;
+            default:
+                std::cout << "Invalid option.\n";
+        }
 }
 
 
-int main() {
-    Player player;
-    bool running = true;
+
+void removeItem(Player* player)
+{
+    std::cout << "\nChoose index of item to remove:\n";
+    int i = 1;
+    std::vector<Item *> items = player->getItems();
+    for (Item *item : items)
+    {
+        std::cout << i << " : " << std::endl;
+        item->display();
+        i++;
+    }
+    int index;
+    std::cout << "Enter index to remove (0 to go back): ";
+    std::cin >> index;
+    if(index == 0) {
+        return;
+    }
+    while (index < 1 || index > i)
+    {
+        std::cout << "(Please enter valid index): ";
+        std::cin >> index;
+    }
+    Item* itemToRemove = player->getItems().at(index - 1);
+    player->removeItem(itemToRemove);
+    //player->showItems();
+    std::cout << "Feature to remove item can be added easily later.\n";
+}
 
 
-    while (running) {
-        showMenu();
+void mainMenu(Player* player, bool& running) {
+    std::cout << "\n===== Main Menu =====\n"
+              << "1. Add item to inventory\n"
+              << "2. Show Inventory\n"
+              << "3. Use Item\n"
+              << "4. Remove Item\n"
+              << "0. Exit\n"
+              << "Choose an option: ";
         int choice;
         std::cin >> choice;
 
