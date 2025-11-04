@@ -1,4 +1,6 @@
 #include "Armor.h"
+#include "Player.h"
+#include "Item.h"
 #include <iostream>
 
 
@@ -13,14 +15,24 @@ bool Armor::isEquipped() const {
     return equipped;
 }
 
-void Armor::setEuipped(bool on) {
+void Armor::setEquipped(bool on) {
     equipped = on;
 }
 
 void Armor::display() const {
-    std::cout << "Armor: " << name << "\n"
-              << "Value: " << value << "\n"
-              << "Damage Reduction: " << damageReduction << "\n"
-              << "Equipped: " << (equipped ? "Yes" : "No")
-              << std::endl;
+    std::cout << "Armor: " << name 
+                << " | Value: " << value
+                << " | Damage Reduction: " << damageReduction 
+                << " | Equipped: " << (equipped ? "Yes" : "No") 
+                << std::endl;
 }
+
+void Armor::use(Player& player) {
+     if(equipped){
+
+     std::cout << "Armor" << name << "equipped! Defense + "  << damageReduction << std::endl;
+    }else{
+     std::cout << "Armor" << name << "unequipped! "<< std::endl;  
+}
+}
+ 
