@@ -3,7 +3,6 @@
 
 #include <string>
 
-// Forward declaration
 class Player;
 
 class Item {
