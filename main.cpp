@@ -107,52 +107,58 @@ void mainMenu(Player* player, bool& running) {
               << "Choose an option: ";
         int choice;
         std::cin >> choice;
-
-
         switch (choice) {
             case 1: {
-                Weapon* weapon = new Weapon("Iron Sword", 25.0, 10);
-                player.addItem(weapon);
-                std::cout << "Added Weapon: " << weapon->getName() << "\n";
+                showMenu(player, running);
                 break;
             }
             case 2: {
-                Armor* armor = new Armor("Leather Armor", 40.0, 5.0, false);
-                player.addItem(armor);
-                std::cout << "Added Armor: " << armor->getName() << "\n";
+                player->showItems();
                 break;
             }
             case 3: {
-                Potion* potion = new Potion("Healing Potion", 10.0, 20);
-                player.addItem(potion);
-                std::cout << "Added Potion: " << potion->getName() << "\n";
+                // Hämta spelarens items
+                std::vector<Item*> items = player->getItems();
+                
+                // Kontroll: tomt inventory
+                if (items.empty()) {
+                    std::cout << "Ditt inventarie är tomt. Lägg till ett föremål först.\n";
+                break;
+                }
+
+                // Visa alla föremål
+                std::cout << "\n=== Dina föremål ===\n";
+                for (int i = 0; i < (int)items.size(); ++i) {
+                    std::cout << (i + 1) << ") ";
+                    items[i]->display();
+                }
+
+                // Låt användaren välja ett index
+                std::cout << "Välj vilket föremål du vill använda (ange nummer): ";
+                int index;
+                std::cin >> index;
+
+                // Kontrollera giltigt val
+                if (std::cin.fail()){
+                    std::cin.clear();
+                    //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    std::cout << "Ogiltigt inmatning";
+                    break;
+                }
+                // Kontrollera giltig val
+                if (index <= 0 || index > (int)items .size()) {
+                    std::cout << "Ogiltig val, försök igen.\n";
+                    break;
+                } 
+                // Anropa spelarens funktion för att använda itemet
+                Item* item = player->getItem(index-1);
+                item->use(*player);
+                //player->useItem(index -1);
                 break;
             }
+
             case 4: {
-                std::cout << "\n--- Inventory ---\n";
-                player.showItems();
-                std::cout << "-----------------\n";
-                break;
-            }
-            case 5: {
-                std::cout << "\nChoose index of item to use:\n";
-                player.showItems();
-                int index;
-                std::cin >> index;
-
-
-                // tillfällig lösning — loopar över items manuellt
-                // (för enkelhet, du kan lägga till getItemByIndex i Player om du vill)
-                std::cout << "Item used (if applicable).\n";
-                break;
-            }
-            case 6: {
-                std::cout << "\nChoose index of item to remove:\n";
-                player.showItems();
-                std::cout << "(Enter index to remove): ";
-                int index;
-                std::cin >> index;
-                std::cout << "Feature to remove item can be added easily later.\n";
+                removeItem(player);
                 break;
             }
             case 0:
@@ -161,9 +167,29 @@ void mainMenu(Player* player, bool& running) {
             default:
                 std::cout << "Invalid option.\n";
         }
+}
+
+
+
+//Menysystem där användaren kan:
+//Lägga till ett föremål till inventariet.
+//Visa alla föremål i inventariet.
+//Använda ett föremål.
+//Ta bort ett föremål från inventariet.
+//Avsluta programmet
+
+
+int main() {
+    Player* player = new Player();
+    bool running = true;
+
+
+    while (running) {
+        mainMenu(player, running);
     }
 
-
+    delete player;
+    player = nullptr;
     std::cout << "Exiting program. Memory cleaned up.\n";
     return 0;
 }
