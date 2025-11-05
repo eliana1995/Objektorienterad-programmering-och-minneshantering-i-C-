@@ -19,6 +19,10 @@ void Player::addItem(Item* item) {
 };
 
 void Player::showItems() {
+    std::cout << "\n===== Inventory =====\n" << std::endl; 
+    if(items.empty()){
+        std::cout << "Inventory is empty." << std::endl;
+    } else {
     for (Item* item : items) {
         item->display();
     }
@@ -37,6 +41,7 @@ void Player::removeItem(Item* item) {
 int Player::getHealth() {
     return health;
 }
+
 Item* Player::getItem(int i)
 {
    return items.at(i);
