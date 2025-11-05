@@ -90,7 +90,7 @@ void removeItem(Player* player)
     int i = 1;
     std::vector<Item *> items = player->getItems();
     if(items.empty()){
-        std::cout << "Inventory is empty." << std::endl;
+        std::cout << "\nInventory is empty." << std::endl;
         return;
     } else {
     std::cout << "\nChoose index of item to remove:\n";
@@ -143,19 +143,19 @@ void mainMenu(Player* player, bool& running) {
                 
                 // Kontroll: tomt inventory
                 if (items.empty()) {
-                    std::cout << "Ditt inventarie är tomt. Lägg till ett föremål först.\n";
+                    std::cout << "Inventory is empty.\n";
                 break;
                 }
 
                 // Visa alla föremål
-                std::cout << "\n=== Dina föremål ===\n";
+                std::cout << "\n===== Inventory =====\n";
                 for (int i = 0; i < (int)items.size(); ++i) {
                     std::cout << (i + 1) << ") ";
                     items[i]->display();
                 }
 
                 // Låt användaren välja ett index
-                std::cout << "Välj vilket föremål du vill använda (ange nummer): ";
+                std::cout << "Choose an item to use:\n";
                 int index;
                 std::cin >> index;
 
@@ -163,12 +163,12 @@ void mainMenu(Player* player, bool& running) {
                 if (std::cin.fail()){
                     std::cin.clear();
                     //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    std::cout << "Ogiltigt inmatning";
+                    std::cout << "Invalid option.";
                     break;
                 }
                 // Kontrollera giltig val
                 if (index <= 0 || index > (int)items .size()) {
-                    std::cout << "Ogiltig val, försök igen.\n";
+                    std::cout << "Invalid input! Try again.\n";
                     break;
                 } 
                 // Anropa spelarens funktion för att använda itemet
