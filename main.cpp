@@ -59,7 +59,6 @@ void showMenu(Player* player, bool& running) {
                 break;
             }
             case 0:
-                running = false;
                 break;
             default:
                 std::cout << "Invalid option.\n";
@@ -174,16 +173,6 @@ void mainMenu(Player* player, bool& running) {
         }
 }
 
-
-
-//Menysystem där användaren kan:
-//Lägga till ett föremål till inventariet.
-//Visa alla föremål i inventariet.
-//Använda ett föremål.
-//Ta bort ett föremål från inventariet.
-//Avsluta programmet
-
-
 int main() {
     Player* player = new Player();
     bool running = true;
@@ -193,8 +182,15 @@ int main() {
         mainMenu(player, running);
     }
 
+    // Free heap memory of player object and pointer
     delete player;
     player = nullptr;
+
+    // Free heap memory of defaultItems objects and pointers
+    for (Item* item : defaultItems) {
+    delete item;
+    item = nullptr;
+    }
     std::cout << "Exiting program. Memory cleaned up.\n";
     return 0;
 }

@@ -4,19 +4,20 @@
 #include <typeinfo>
 #include <iostream>
 
-Player::Player():
-health(45){};
+Player::Player():health(45){}
 
 Player::~Player() {
+    if(!items.empty()){
     for(Item* item : items) {
+        std::cout << "Deleting item" << std::endl;
         delete item;
         item = nullptr;
-    }
+    }}
 }
 
 void Player::addItem(Item* item) {
-    items.emplace_back(item);
-};
+    items.emplace_back(item->clone());
+}
 
 void Player::showItems() {
     std::cout << "\n===== Inventory =====\n" << std::endl; 
@@ -25,8 +26,8 @@ void Player::showItems() {
     } else {
     for (Item* item : items) {
         item->display();
-    }
-};
+    }}
+}
 
 void Player::removeItem(Item* item) {
     for (auto it = items.begin(); it != items.end(); it++) {
@@ -45,16 +46,12 @@ int Player::getHealth() {
 Item* Player::getItem(int i)
 {
    return items.at(i);
-};
+}
 
 void Player::setHealth(int newHealth) {
     health = newHealth;
-};
+}
 
 std::vector<Item*> Player::getItems() {
     return items;
 }
-
-//void Player::useItem(Item& item, Player& player) {
-//    item->use(player);
-//}

@@ -20,3 +20,8 @@ void Weapon::use(Player& player)
               << (equipped ? " is now equipped!" : " is unequipped!")
               << std::endl;
 }
+
+Item* Weapon::clone() const
+{
+    return new Weapon(*this);
+}

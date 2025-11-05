@@ -35,4 +35,9 @@ void Armor::use(Player& player) {
      std::cout << "Armor" << name << "unequipped! "<< std::endl;  
 }
 }
- 
+
+Item* Armor::clone() const
+{
+    return new Armor(*this);
+}
+

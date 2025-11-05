@@ -29,4 +29,10 @@ void Potion::use(Player& player){
     std::cout << "You used potion: " << name 
                 << " and gained: " << boost 
                 << " in health!" << std::endl;
+
+    player.removeItem(this);
+}
+
+Item* Potion::clone() const {
+    return new Potion(*this);
 }
