@@ -72,6 +72,7 @@ void showMenu(Player* player, bool& running) {
                 break;
             }
             case 0:
+                running = false;
                 break;
             default:
                 std::cout << "Invalid option.\n";
