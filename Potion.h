@@ -13,6 +13,7 @@ public:
     Potion(const std::string& name, double value, int boost);
     void display() const override;
     void use(Player& player) override;
+    Item* clone() const override;
 
 };
 

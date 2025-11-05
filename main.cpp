@@ -173,16 +173,6 @@ void mainMenu(Player* player, bool& running) {
         }
 }
 
-
-
-//Menysystem där användaren kan:
-//Lägga till ett föremål till inventariet.
-//Visa alla föremål i inventariet.
-//Använda ett föremål.
-//Ta bort ett föremål från inventariet.
-//Avsluta programmet
-
-
 int main() {
     Player* player = new Player();
     bool running = true;

@@ -16,6 +16,7 @@ public:
     void setEquipped(bool on); 
     void display() const override;
     void use(Player& player) override;
+    Item* clone() const override;
 
 private:
     double damageReduction;

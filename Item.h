@@ -17,6 +17,7 @@ public:
     double getValue() const;
     virtual void display() const = 0;
     virtual void use(Player& player) = 0;
+    virtual Item* clone() const = 0;
 };
 
 #endif

@@ -13,6 +13,8 @@ public:
     Weapon(const std::string& name, double value, int damage);
     void display() const override;
     void use(Player& player) override;
+    Item* clone() const override;
+
 };
 
 #endif
