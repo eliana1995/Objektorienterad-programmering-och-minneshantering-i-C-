@@ -28,11 +28,12 @@ void Armor::display() const {
 }
 
 void Armor::use(Player& player) {
-     if(equipped){
+    equipped = !equipped;
+    if(equipped){
 
-     std::cout << "Armor" << name << "equipped! Defense + "  << damageReduction << std::endl;
+     std::cout << "Armor " << name << " equipped! Defense + "  << damageReduction << std::endl;
     }else{
-     std::cout << "Armor" << name << "unequipped! "<< std::endl;  
+     std::cout << "Armor " << name << " unequipped! "<< std::endl;  
 }
 }
 
