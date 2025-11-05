@@ -5,6 +5,10 @@
 #include "Armor.h"
 #include "Potion.h"
 
+#include <sstream>
+#include <string>
+#include <limits>
+
 std::vector<Item*> initializeDefaultItems() {
     std::vector<Item*> items;
         items.emplace_back(new Potion("Ultra Super Health Potion", 200.0, 50));
@@ -49,15 +53,14 @@ void showMenu(Player* player, bool& running) {
             case 1: {
                 bool validChoice = false;
                 while (!validChoice){
-                std::cout << "Choose an item to add to inventory:\n" << std::endl;
+                std::cout << "\nChoose an item to add to inventory:\n" << std::endl;
                 int index = 0;
                     for(Item* items : defaultItems){
                         std::cout << (index + 1) << ". ";
                          items->display();
                          index++;
                         }
-                        int itemChoice;
-                        std:: cin >> itemChoice;
+                        int itemChoice = getIntFromUser("\nEnter you choice of item: ");
 
                         itemChoice -= 1;
 
