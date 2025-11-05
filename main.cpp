@@ -191,7 +191,7 @@ void mainMenu(Player* player, bool& running) {
 }
 
 int main() {
-    Player* player = new Player();
+    Player player;
     bool running = true;
 
 
