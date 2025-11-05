@@ -4,6 +4,7 @@
 #include "Weapon.h"
 #include "Armor.h"
 #include "Potion.h"
+#include "InputHandlers.h"
 
 #include <sstream>
 #include <string>
@@ -23,30 +24,15 @@ std::vector<Item*> initializeDefaultItems() {
     return items;
 }
 
-
-
-
 std::vector<Item*> defaultItems = initializeDefaultItems();
-
-int getIntFromUser(const std::string& prompt){
-    int value;
-    while (true) {
-        std::cout << prompt;
-        std::string line;
-        std::getline(std::cin, line);
-        std::stringstream ss(line);
-        if (ss >> value && ss.eof()) return value;
-        std::cout << "Invalid input! Try again.\n";
-    }
-}
 
 void showMenu(Player* player, bool& running) {
     std::cout << "\n===== Inventory Menu =====\n"
               << "1. Choose Item to inventory\n"
               << "0. Exit\n";
 
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        //std::cin.clear();
+        //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         int choice = getIntFromUser("Choose an option: ");
 
         switch (choice) {
@@ -75,18 +61,15 @@ void showMenu(Player* player, bool& running) {
                 break;
             }
             case 0:
-                running = false;
                 break;
             default:
                 std::cout << "Invalid option.\n";
         }
 }
 
-
-
 void removeItem(Player* player)
 {
-        std::cout << "\n===== Remove item from inventory =====\n";
+    std::cout << "\n===== Remove item from inventory =====\n";
     int i = 1;
     std::vector<Item *> items = player->getItems();
     if(items.empty()){
@@ -100,10 +83,9 @@ void removeItem(Player* player)
         item->display();
         i++;
     }}
-    int index;
-    std::cout << "0. Go back): ";
+    std::cout << "0. Go back\n";
     std::cout << "Enter index to remove: ";
-    std::cin >> index;
+    int index = getIntInRangeFromUser(0, items.size());
     if(index == 0) {
         return;
     }
@@ -114,7 +96,6 @@ void removeItem(Player* player)
     }
     Item* itemToRemove = player->getItems().at(index - 1);
     player->removeItem(itemToRemove);
-    std::cout << "Feature to remove item can be added easily later.\n";
 }
 
 
@@ -126,8 +107,7 @@ void mainMenu(Player* player, bool& running) {
               << "4. Remove Item\n"
               << "0. Exit\n"
               << "Choose an option: ";
-        int choice;
-        std::cin >> choice;
+        int choice = getIntInRangeFromUser(0, 4);
         switch (choice) {
             case 1: {
                 showMenu(player, running);
