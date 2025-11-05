@@ -192,8 +192,15 @@ int main() {
         mainMenu(player, running);
     }
 
+    // Free heap memory of player object and pointer
     delete player;
     player = nullptr;
+
+    // Free heap memory of defaultItems objects and pointers
+    for (Item* item : defaultItems) {
+    delete item;
+    item = nullptr;
+    }
     std::cout << "Exiting program. Memory cleaned up.\n";
     return 0;
 }
