@@ -24,13 +24,26 @@ std::vector<Item*> initializeDefaultItems() {
 
 std::vector<Item*> defaultItems = initializeDefaultItems();
 
+int getIntFromUser(const std::string& prompt){
+    int value;
+    while (true) {
+        std::cout << prompt;
+        std::string line;
+        std::getline(std::cin, line);
+        std::stringstream ss(line);
+        if (ss >> value && ss.eof()) return value;
+        std::cout << "Invalid input! Try again.\n";
+    }
+}
+
 void showMenu(Player* player, bool& running) {
     std::cout << "\n===== Inventory Menu =====\n"
               << "1. Choose Item to inventory\n"
-              << "0. Exit\n"
-              << "Choose an option: ";
-        int choice;
-        std::cin >> choice;
+              << "0. Exit\n";
+
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        int choice = getIntFromUser("Choose an option: ");
 
         switch (choice) {
             case 1: {
