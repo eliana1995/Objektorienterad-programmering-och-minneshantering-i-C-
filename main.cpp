@@ -196,12 +196,8 @@ int main() {
 
 
     while (running) {
-        mainMenu(player, running);
+        mainMenu(&player, running);
     }
-
-    // Free heap memory of player object and pointer
-    delete player;
-    player = nullptr;
 
     // Free heap memory of defaultItems objects and pointers
     for (Item* item : defaultItems) {
