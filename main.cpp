@@ -70,17 +70,23 @@ void showMenu(Player* player, bool& running) {
 
 void removeItem(Player* player)
 {
-    std::cout << "\nChoose index of item to remove:\n";
+        std::cout << "\n===== Remove item from inventory =====\n";
     int i = 1;
     std::vector<Item *> items = player->getItems();
+    if(items.empty()){
+        std::cout << "Inventory is empty." << std::endl;
+        return;
+    } else {
+    std::cout << "\nChoose index of item to remove:\n";
     for (Item *item : items)
     {
-        std::cout << i << " : " << std::endl;
+        std::cout << i << ". ";
         item->display();
         i++;
-    }
+    }}
     int index;
-    std::cout << "Enter index to remove (0 to go back): ";
+    std::cout << "0. Go back): ";
+    std::cout << "Enter index to remove: ";
     std::cin >> index;
     if(index == 0) {
         return;
@@ -92,7 +98,6 @@ void removeItem(Player* player)
     }
     Item* itemToRemove = player->getItems().at(index - 1);
     player->removeItem(itemToRemove);
-    //player->showItems();
     std::cout << "Feature to remove item can be added easily later.\n";
 }
 
