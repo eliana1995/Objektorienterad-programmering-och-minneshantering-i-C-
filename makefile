@@ -1,7 +1,7 @@
 EXECUTABLE = game
 CC = g++
 CFLAGS = -Wall -g -std=c++11
-SOURCES = main.cpp Armor.cpp Item.cpp Player.cpp Potion.cpp Weapon.cpp
+SOURCES = main.cpp Armor.cpp Item.cpp Player.cpp Potion.cpp Weapon.cpp InputHandlers.cpp
 OBJDIR = build
 OBJECTS = $(addprefix $(OBJDIR)/, $(SOURCES:.cpp=.o))
 
