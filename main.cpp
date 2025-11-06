@@ -118,44 +118,29 @@ void mainMenu(Player* player, bool& running) {
                 break;
             }
             case 3: {
-                // Hämta spelarens items
-                std::vector<Item*> items = player->getItems();
-                
-                // Kontroll: tomt inventory
-                if (items.empty()) {
-                    std::cout << "Inventory is empty.\n";
-                break;
-                }
+               const std::vector<Item*>& items = player->getItems();
 
-                // Visa alla föremål
-                std::cout << "\n===== Inventory =====\n";
-                for (int i = 0; i < (int)items.size(); ++i) {
-                    std::cout << (i + 1) << ") ";
-                    items[i]->display();
-                }
+                 if (items.empty()) {
+                  std::cout << "Inventory is empty.\n";
+                 break;
+            }
 
-                // Låt användaren välja ett index
-                std::cout << "Choose an item to use:\n";
-                int index;
-                std::cin >> index;
+                  std::cout << "\n===== Inventory =====\n";
+                 for (size_t i = 0; i < items.size(); ++i) {
+                   std::cout << (i + 1) << ") ";
+                   items[i]->display();
+            }
+      
+                 int index = getIntFromUser("Enter the number of the item to use: ");
 
-                // Kontrollera giltigt val
-                if (std::cin.fail()){
-                    std::cin.clear();
-                    //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    std::cout << "Invalid option.";
-                    break;
-                }
-                // Kontrollera giltig val
-                if (index <= 0 || index > (int)items .size()) {
-                    std::cout << "Invalid input! Try again.\n";
-                    break;
-                } 
-                // Anropa spelarens funktion för att använda itemet
-                Item* item = player->getItem(index-1);
-                item->use(*player);
-                //player->useItem(index -1);
-                break;
+                 if (index < 1 || index > static_cast<int>(items.size())) {
+                   std::cout << "Invalid choice. Please enter a number from the list.\n";
+                 break;
+            }
+
+                 Item* item = player->getItem(index - 1);
+                  item->use(*player);
+                  break;
             }
 
             case 4: {
