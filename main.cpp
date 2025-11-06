@@ -27,12 +27,12 @@ std::vector<Item*> initializeDefaultItems() {
 std::vector<Item*> defaultItems = initializeDefaultItems();
 
 void showMenu(Player* player, bool& running) {
+    bool inInventoryMenu = true;
+    while (inInventoryMenu){
     std::cout << "\n===== Inventory Menu =====\n"
               << "1. Choose Item to inventory\n"
               << "0. Exit\n";
 
-        //std::cin.clear();
-        //std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         int choice = getIntFromUser("Choose an option: ");
 
         switch (choice) {
@@ -66,10 +66,12 @@ void showMenu(Player* player, bool& running) {
                 break;
             }
             case 0:
+            inInventoryMenu = false;
                 break;
             default:
                 std::cout << "Invalid option.\n";
         }
+}
 }
 
 void removeItem(Player* player)
