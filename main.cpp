@@ -60,8 +60,13 @@ void showMenu(Player* player, bool& running) {
                          items->display();
                          index++;
                         }
+                        std::cout << "0. Exit\n";
                         int itemChoice = getIntFromUser("\nEnter you choice of item: ");
 
+                        if(itemChoice == 0){
+                            validChoice = true;
+                            break;
+                        }
                         itemChoice -= 1;
 
                         if (itemChoice >= 0 && itemChoice < int(defaultItems.size())) {
